@@ -1,0 +1,130 @@
+<template>
+  <div
+    class="bg-container ![perspective:1000px] sm:![perspective:1000px] md:![perspective:1000px] lg:![perspective:1000px]">
+    <div class="absolute inset-0 z-[100] [--gradient-stop-1:0px] [--gradient-stop-2:50%]" :style="{
+      background: 'linear-gradient(to top, rgba(0,0,0,0) 0px, var(--geist-foreground) 50%)'
+    }">
+    </div>
+    <div :style="{
+      transform: 'rotateX(75deg)',
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+    }">
+      <div class="lines" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+// 组件逻辑
+</script>
+
+<style scoped>
+.bg-container {
+  position: absolute;
+  z-index: -6;
+  overflow: hidden;
+  inset: 0;
+  transition: perspective 3000ms ease 0s;
+}
+
+.lines {
+  --right: #f8cde8;
+  --left: #b9ddff;
+  position: absolute;
+  width: 200vw;
+  margin-left: -50%;
+  transform: translateY(0);
+  background-image: linear-gradient(to right,
+      var(--left) 45%,
+      rgba(0, 0, 0, 0) 50%,
+      var(--right) 55%);
+  mask-image: linear-gradient(to right,
+      rgba(0, 0, 0, 1) 2px,
+      rgba(0, 0, 0, 0) 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 1) 2px, rgba(0, 0, 0, 0) 1px);
+  mask-size: 60px 60px;
+  overflow: hidden;
+  mask-repeat: repeat repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inset: -100% 0px;
+  background-position-y: 100%;
+  mask-position: 50% 0px;
+  animation: go-up 60s linear infinite;
+}
+
+@media (min-width: 1024px) {
+  .lines {
+    animation-duration: 30s;
+    mask-size: 80px 80px;
+  }
+}
+
+:global(.dark) .lines {
+  --right: #4c2638;
+  --left: #223b67;
+}
+
+@keyframes go-up {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(calc(50% + 28px));
+  }
+}
+
+.pulse::before {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  animation: pulse-frames ease-out 8s infinite;
+  animation-delay: 0s;
+  background: rgba(0, 0, 0, 0) linear-gradient(to top,
+      rgba(0, 0, 0, 0) 45%,
+      var(--pulse-color) 50%,
+      rgba(0, 0, 0, 0) 90%) no-repeat;
+  z-index: 211;
+  animation-delay: var(--delay);
+}
+
+@keyframes pulse-frames {
+  0% {
+    transform: translateY(0%);
+  }
+
+  50% {
+    transform: translateY(200%);
+  }
+
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .lines {
+    animation: none;
+  }
+
+  .pulse::before {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .lines {
+    animation: none;
+  }
+
+  .pulse::before {
+    animation: none;
+  }
+}
+</style>

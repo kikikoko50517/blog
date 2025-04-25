@@ -1,0 +1,24 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev docs --host",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.9.0",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "vitepress": "^1.6.3"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  }
+}
